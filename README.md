@@ -25,4 +25,6 @@ To keep all build files do
 
 Delete downloaded file
 -------------------
-    removeall
+Just execute following command again
+
+    ./pdflatex/install

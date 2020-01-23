@@ -18,7 +18,6 @@ complete -f -X '!*.tex' TexToPdf\n" >> ~/.bashrc
 source ~/.bashrc
 else
        echo "TexToPdf Name already there"
+       #Remove the local repo
+       rm -rf pdflatex 
 fi
-
-alias removeall='rm -rf pdflatex'
-
