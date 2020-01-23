@@ -1,0 +1,23 @@
+#!/bin/bash
+
+word=$(grep -n "TexToPdf" ~/.bashrc)
+if [ -z "$word" ]
+then
+echo -e "
+#PDFLatex
+function TexToPdf(){
+if [ -z '\$2' ]
+then
+    # If Second Argument is empty
+    mkdir -p build; pdflatex -halt-on-error -shell-escape '\$1' | grep '^!.*' -A200 --color=always || :; rm -f *.out *.err *.py *.aux *.pytxcode && rm -rf ./build
+else
+    mkdir -p build; pdflatex -halt-on-error -shell-escape '\$1' | grep '^!.*' -A200 --color=always || :; mv -f *.out *.err *.py *.aux *.pytxcode ./build
+fi
+}
+complete -f -X '!*.tex' TexToPdf\n" >> ~/.bashrc
+source ~/.bashrc
+else
+	echo "TexToPdf Name already there"
+fi
+
+alias removeall='rm -rf pdflatex'
