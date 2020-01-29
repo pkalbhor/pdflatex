@@ -4,7 +4,7 @@
 #-- Email: physics.pritam@gmail.com
 #-- Modified: 30th Jan 2020
   
-bashrc="/home/pk/.bashrc"
+bashrc="~/.bashrc"
 help="echo -e 'How to run? \\\nTexToPdf filename.tex: Show only Errors on terminal. \\\nTexToPdf filename.tex -w: Show warnings along with errors. \\\nTexToPdf filename.tex -k: Keep build files in a folder.'"
 
 word=$(grep -n "TexToPdf" $bashrc)
