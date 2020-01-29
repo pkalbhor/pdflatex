@@ -1,21 +1,37 @@
 #!/bin/bash
+
+#-- Author: Pritam Kalbhor
+#-- Email: physics.pritam@gmail.com
+#-- Modified: 30th Jan 2020
   
-word=$(grep -n "TexToPdf" ~/.bashrc)
+bashrc="/home/pk/.bashrc"
+help="echo -e 'How to run? \\\nTexToPdf filename.tex: Show only Errors on terminal. \\\nTexToPdf filename.tex -w: Show warnings along with errors. \\\nTexToPdf filename.tex -k: Keep build files in a folder.'"
+
+word=$(grep -n "TexToPdf" $bashrc)
 if [ -z "$word" ]
 then
-echo -e "
+echo -e """
 #PDFLatex
 function TexToPdf(){
 if [ -z \"\$2\" ]
 then
     # If Second Argument is empty
     mkdir -p build; pdflatex -halt-on-error -shell-escape \"\$1\" | grep '^!.*' -A200 --color=always || :; rm -f *.out *.err *.py *.aux *.pytxcode && rm -rf ./build
+elif [ \$2 == \"-w\" ]
+then
+    mkdir -p build; pdflatex -halt-on-error -shell-escape \"\$1\" | grep '^!.*\|LaTeX Warning:*' -A200 --color=always || :; rm -f *.out *.err *.py *.aux *.pytxcode && rm -rf ./build
+elif [ \$2 == \"-k\" ]
+then
+    mkdir -p build; pdflatex -halt-on-error -shell-escape \"\$1\" | grep '^!.*' -A200 --color=always || :; mv -f *.out *.err *.py *.aux *.pytxcode ./build
+elif [ \$2 == \"-h\" ]
+then
+    ${help}
 else
     mkdir -p build; pdflatex -halt-on-error -shell-escape \"\$1\" | grep '^!.*' -A200 --color=always || :; mv -f *.out *.err *.py *.aux *.pytxcode ./build
 fi
 }
-complete -f -X '!*.tex' TexToPdf\n" >> ~/.bashrc
-source ~/.bashrc
+complete -f -X '!*.tex' TexToPdf\n""" >> $bashrc
+source $bashrc  
 else
        echo "TexToPdf Name already there"
        #Remove the local repo

@@ -21,7 +21,11 @@ To Compile `.tex` file do
 
 To keep all build files do
     
-    TexToPdf filename.tex k
+    TexToPdf filename.tex -k
+
+For Help:
+
+    TexToPdf -h
 
 Delete downloaded file
 -------------------
