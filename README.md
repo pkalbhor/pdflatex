@@ -25,7 +25,7 @@ To keep all build files do
 
 For Help:
 
-    TexToPdf -h
+    TexToPdf filename.tex -h
 
 Delete downloaded file
 -------------------
